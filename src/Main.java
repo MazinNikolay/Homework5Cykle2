@@ -25,12 +25,13 @@ public class Main {
     public static void task1() {
         int depositGoal = 2_459_000;
         int deposit = 15_000;
-        double depositSum = 0.00;
+        float depositSum = 0.00f;
         int monthCount = 0;
         while (depositSum < depositGoal) {
-            depositSum += deposit * 1.01;
+            depositSum += deposit + (deposit / 100f) * 1;
             monthCount++;
-            System.out.println("Месяц " + monthCount + ", сумма накоплений равна " + depositSum + " рублей");
+            System.out.printf("Месяц " + monthCount + ", сумма накоплений равна %.2f рублей", depositSum);
+            System.out.println();
         }
     }
 
@@ -46,49 +47,58 @@ public class Main {
         for (; i >= 0; i--) {
             System.out.print(i + " ");
         }
+        System.out.println();
     }
 
     public static void task3() {
-        int population = 12_000_000;
-        int mortality = 8;
-        int birthRate;
+        float population = 12_000_000.00f;
+        float mortality;
+        float birthRate;
+        int populationRound;
         for (int year = 1; year <= 10; year++) {
-            birthRate = 17 * (population / 1000);
-            population = population + birthRate - mortality;
-            System.out.println("Год " + year + ", численность населения составляет " + population);
+            birthRate = 17f * (population / 1000);
+            mortality = 8f * (population / 1000);
+            population = population + birthRate - mortality; //Для точности расчета учитываю дробную часть
+            populationRound = (int) population; // Количество людей не может быть не целым - округляю
+            System.out.println("Год " + year + ", численность населения составляет " + populationRound);
         }
     }
 
     public static void task4() {
-        int depositSum = 15_000;
+        float depositSum = 15_000.00f;
         int month = 0;
-        while (depositSum <= 12_000_000) {
+        while (depositSum <= 12_000_000.00) {
             month++;
-            depositSum *= 1.07;
-            System.out.println("Месяц " + month + ", сумма накоплений равна " + depositSum + " рублей");
+            depositSum += (depositSum / 100f) * 7;
+            System.out.printf("Месяц " + month + ", сумма накоплений равна %.2f рублей", depositSum);
+            System.out.println();
         }
     }
 
     public static void task5() {
-        int depositSum = 15_000;
+        float depositSum = 15_000.00f;
         int month = 0;
-        while (depositSum <= 12_000_000) {
+        while (depositSum <= 12_000_000.00) {
             month++;
-            depositSum *= 1.07;
-            if (month % 6 == 0)
-                System.out.println("Месяц " + month + ", сумма накоплений равна " + depositSum + " рублей");
+            depositSum += (depositSum / 100f) * 7;
+            if (month % 6 == 0) {
+                System.out.printf("Месяц " + month + ", сумма накоплений равна %.2f рублей", depositSum);
+                System.out.println();
+            }
         }
     }
 
     public static void task6() {
-        int depositSum = 15_000;
+        float depositSum = 15_000.00f;
         int month = 0;
         int monthGoal = 12 * 9;
         while (month <= monthGoal) {
             month++;
-            depositSum *= 1.07;
-            if (month % 6 == 0)
-                System.out.println("Месяц " + month + ", сумма накоплений равна " + depositSum + " рублей");
+            depositSum += (depositSum / 100f) * 1;
+            if (month % 6 == 0) {
+                System.out.printf("Месяц " + month + ", сумма накоплений равна %.2f рублей", depositSum);
+                System.out.println();
+            }
         }
     }
 
